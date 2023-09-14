@@ -55,7 +55,7 @@ public class Service {
 //                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
                 Model_Message m = new ServiceUser(txt).register(t);
 //                ar.sendAckData(m.isAction(), m.getMessage(),((Model_User_Account) m.getData()).getUserID());
-                ar.sendAckData(m.isAction(), m.getMessage(), ((Model_User_Account)m.getData()));
+                ar.sendAckData(m.isAction(), m.getMessage(), ((Model_User_Account)m.getData()).getUserID(),((Model_User_Account)m.getData()).getUser_Name());
                 if (m.isAction()) {
                     txt.append("User register: " + t.getUsername() + " / " + t.getPassword() + "\n");
                     server.getBroadcastOperations().sendEvent("list_user", (Model_User_Account) m.getData());
