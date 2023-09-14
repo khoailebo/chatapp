@@ -57,6 +57,8 @@ public class PublicEvent {
     private EventSendMessage eventSendMessage;
     private EventMain eventMain;
     private EventLogin eventLogin;
+    private EventSetUserName eventSetUserName;
+    
     private PublicEvent(){
         
     }
@@ -78,5 +80,19 @@ public class PublicEvent {
     }
     public EventImageDonwload getEventImageDonwload(){
         return eventImageDownload;
+    }
+
+    /**
+     * @return the eventSetUserName
+     */
+    public EventSetUserName getEventSetUserName() {
+        return eventSetUserName;
+    }
+
+    /**
+     * @param eventSetUserName the eventSetUserName to set
+     */
+    public void setEventSetUserName(EventSetUserName eventSetUserName) {
+        this.eventSetUserName = eventSetUserName;
     }
 }

@@ -4,6 +4,8 @@
  */
 package com.nhom11.chatcomp;
 
+import com.nhom11.event.EventSetUserName;
+import com.nhom11.event.PublicEvent;
 import java.awt.Color;
 
 /**
@@ -17,6 +19,19 @@ public class Chat_Title extends javax.swing.JPanel {
      */
     public Chat_Title() {
         initComponents();
+        initEvent();
+    }
+    
+    public void initEvent(){
+//        PublicEvent.getInstance().setEventLogin(new );
+        PublicEvent.getInstance().setEventSetUserName(new EventSetUserName(){
+            @Override
+            public void setUserName(String name) {
+//                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+                setName(name);
+            }
+            
+        });
     }
     public void setName(String name){
         this.lbName.setText(name);

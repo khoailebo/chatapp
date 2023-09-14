@@ -16,4 +16,5 @@ public interface EventLogin {
     public void register(Model_Register data,EventMessage em);
     public void goLogin();
     public void goRegister();
+//    public void setUserName(String name);
 }

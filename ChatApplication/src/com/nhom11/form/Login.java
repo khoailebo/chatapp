@@ -60,7 +60,11 @@ public class Login extends javax.swing.JPanel {
                             Model_Message message = new Model_Message((boolean) os[0], String.valueOf(os[1]));
                             System.out.println(message.getMessage());
                             if(message.isAction())
-                            Service.setCurrent_User_Account(new Model_User_Account(os[2]));
+//                            Service.setCurrent_User_Account(new Model_User_Account(os[2]));
+                        {
+                                System.out.println(os[2] + " " + String.valueOf(os[3]));
+                                PublicEvent.getInstance().getEventSetUserName().setUserName(String.valueOf(os[3]));
+                            }
                             em.callMessage(message);
                         }
                     }
