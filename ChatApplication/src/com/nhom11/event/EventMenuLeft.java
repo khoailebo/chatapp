@@ -4,14 +4,15 @@
  */
 package com.nhom11.event;
 
-import com.nhom11.model.Model_Recieve_Message;
-import com.nhom11.model.Model_Send_Message;
+import com.nhom11.model.Model_User_Account;
+import java.util.List;
 
 /**
  *
  * @author btdun
  */
-public interface EventSendMessage {
-    public void sendMessage(Model_Send_Message ms);
-    public void receivedMessage(Model_Recieve_Message ms);
+public interface EventMenuLeft {
+    public void addUsers(List<Model_User_Account>users);
+    public void userConnect(int User_ID);
+    public void userDisconnect(int User_ID);
 }

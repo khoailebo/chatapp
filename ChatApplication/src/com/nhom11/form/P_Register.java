@@ -159,7 +159,7 @@ public class P_Register extends javax.swing.JPanel {
 //                    throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
                     if (message.isAction()) {
                         txtMessage.setForeground(new Color(51, 255, 51));
-                        PublicEvent.getInstance().getEventLogin().login();
+                        PublicEvent.getInstance().getEventMain().initChat();
                     } else {
                         txtMessage.setForeground(Color.red);
                         txtMessage.setText(message.getMessage());

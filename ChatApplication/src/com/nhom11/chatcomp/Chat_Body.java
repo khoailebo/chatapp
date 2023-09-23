@@ -4,12 +4,16 @@
  */
 package com.nhom11.chatcomp;
 
+import com.nhom11.model.Model_Recieve_Message;
+import com.nhom11.model.Model_Send_Message;
 import com.nhom11.swing.ModernScrollBar;
 import java.awt.Adjustable;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.event.AdjustmentEvent;
 import java.awt.event.AdjustmentListener;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JComponent;
@@ -28,7 +32,7 @@ public class Chat_Body extends javax.swing.JPanel {
     public Chat_Body() {
         initComponents();
         init();
-        addItemRight("Hi");
+//        addItemRight("Hi");
 //        addItemLeft("", "Dung", "LTH2QIkXyEjF_Nads+WBE2jFMxoz");
 //        addItemLeft("Hello", "Dung",new ImageIcon(getClass().getResource("/com/nhom11/icon/testing/dog.jpg")),
 //                new ImageIcon(getClass().getResource("/com/nhom11/icon/testing/pic.jpg")));
@@ -97,7 +101,30 @@ public class Chat_Body extends javax.swing.JPanel {
         body.repaint();
         body.revalidate();
     }
+    public void addItemRight(Model_Send_Message data){
+        Chat_Right item = new Chat_Right();
+        item.setText(data.getText());
+        item.setTime(getCurrentTime());
+        body.add(item,"wrap,al right,w 100::80%");
+        scrollToBottom();
+        repaint();
+        revalidate();
+    }
     
+    public String getCurrentTime(){
+        Date dnow = new Date();
+        SimpleDateFormat sf = new SimpleDateFormat("hh:mm");
+        return sf.format(dnow);
+    }
+    public void addItemLeft(Model_Recieve_Message data){
+        Chat_Left item = new Chat_Left();
+        item.setText(data.getText());
+        item.setTime(getCurrentTime());
+        body.add(item,"wrap,w 100::80%");
+        scrollToBottom();
+        repaint();
+        revalidate();
+    }
     public void addItemRight(String text, String user,String ... images){
         Chat_Right item = new Chat_Right();
         item.setText(text);
@@ -147,6 +174,11 @@ public class Chat_Body extends javax.swing.JPanel {
         };
         verticalBar.addAdjustmentListener(downScroller);
     }
+     public void resetChat(){
+         body.removeAll();
+         body.revalidate();
+         body.repaint();
+     }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

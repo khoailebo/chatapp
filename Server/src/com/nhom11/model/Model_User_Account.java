@@ -1,101 +1,61 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.nhom11.model;
 
-
-
-
-/**
- *
- * @author btdun
- */
 public class Model_User_Account {
 
-    /**
-     * @return the UserID
-     */
     public int getUserID() {
-        return UserID;
+        return userID;
     }
 
-    /**
-     * @param UserID the UserID to set
-     */
-    public void setUserID(int UserID) {
-        this.UserID = UserID;
+    public void setUserID(int userID) {
+        this.userID = userID;
     }
 
-    /**
-     * @return the User_Name
-     */
-    public String getUser_Name() {
-        return User_Name;
+    public String getUserName() {
+        return userName;
     }
 
-    /**
-     * @param User_Name the User_Name to set
-     */
-    public void setUser_Name(String User_Name) {
-        this.User_Name = User_Name;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
-    /**
-     * @return the image
-     */
-    public String getImage() {
-        return image;
-    }
-
-    /**
-     * @param image the image to set
-     */
-    public void setImage(String image) {
-        this.image = image;
-    }
-
-    /**
-     * @return the gender
-     */
     public String getGender() {
         return gender;
     }
 
-    /**
-     * @param gender the gender to set
-     */
     public void setGender(String gender) {
         this.gender = gender;
     }
 
-    /**
-     * @return the status
-     */
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
     public boolean isStatus() {
         return status;
     }
 
-    /**
-     * @param status the status to set
-     */
     public void setStatus(boolean status) {
         this.status = status;
     }
 
-    public Model_User_Account(int UserID, String User_Name, String image, String gender, boolean status) {
-        this.UserID = UserID;
-        this.User_Name = User_Name;
-        this.image = image;
+    public Model_User_Account(int userID, String userName, String gender, String image, boolean status) {
+        this.userID = userID;
+        this.userName = userName;
         this.gender = gender;
+        this.image = image;
         this.status = status;
     }
-    
-    
-    private int UserID;
-    private String User_Name;
-    private String image;
+
+    public Model_User_Account() {
+    }
+
+    private int userID;
+    private String userName;
     private String gender;
+    private String image;
     private boolean status;
-    
 }

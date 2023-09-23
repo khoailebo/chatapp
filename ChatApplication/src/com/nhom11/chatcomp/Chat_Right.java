@@ -37,7 +37,7 @@ public class Chat_Right extends javax.swing.JLayeredPane {
     }
     public void setTime(String time){
         txt.setTime(time);
-        txt.seen();
+        txt.sendSuccessfull();
     }
     public void setFile(String fileName,String fileSize){
         txt.setFile(true, fileName, fileSize);

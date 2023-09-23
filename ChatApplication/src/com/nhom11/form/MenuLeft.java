@@ -6,6 +6,14 @@ package com.nhom11.form;
 
 import com.nhom11.swing.ModernScrollBar;
 import com.nhom11.comp.User_Item;
+import com.nhom11.event.EventMenuLeft;
+import com.nhom11.event.PublicEvent;
+import com.nhom11.model.Model_User_Account;
+import com.nhom11.service.Service;
+import io.socket.emitter.Emitter;
+import java.awt.Component;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JComponent;
 import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
@@ -18,7 +26,7 @@ import net.miginfocom.swing.MigLayout;
  * @author btdun
  */
 public class MenuLeft extends javax.swing.JPanel {
-
+    List<Model_User_Account>users_List;
     /**
      * Creates new form MenuLeft
      */
@@ -27,33 +35,88 @@ public class MenuLeft extends javax.swing.JPanel {
         init();
     }
     public void init(){
+        users_List = new ArrayList<>();
         List.setLayout(new MigLayout("fillx, wrap","0[fill]0","5[]5"));
         message.setSelected(true);
+        PublicEvent.getInstance().setEventMenuLeft(new EventMenuLeft(){
+            @Override
+            public void addUsers(List<Model_User_Account> users) {
+//                users_List.clear();
+//                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+                for (Model_User_Account item : users){
+                    if(item.getUserID() != Service.getInstance().getCurrent_User_Account().getUserID())
+                    users_List.add(item);
+                    showUser();
+                }
+            }
+
+            @Override
+            public void userConnect(int User_ID) {
+//                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+                for(Model_User_Account user : users_List){
+                    if(user.getUserID() == User_ID){
+                        user.setStatus(true);
+                        break;
+                    }
+                }
+                if(message.isSelected())
+                for(Component comp : List.getComponents()){
+                    User_Item item = (User_Item)comp;
+                    if(item.getUser().getUserID() == User_ID){
+//                        item.getUser().setStatus(true);
+                        item.updateStatus();
+                        break;
+                    }
+                }
+            }
+
+            @Override
+            public void userDisconnect(int User_ID) {
+//                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+                 for(Model_User_Account user : users_List){
+                    if(user.getUserID() == User_ID){
+                        user.setStatus(false);
+                        break;
+                    }
+                }
+                if(message.isSelected())
+                for(Component comp : List.getComponents()){
+                    User_Item item = (User_Item)comp;
+                    if(item.getUser().getUserID() == User_ID){
+//                        item.getUser().setStatus(true);
+                        item.updateStatus();
+                        break;
+                    }
+                }
+            }
+            
+        });
         showUser();
         sp.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         sp.setVerticalScrollBar(new ModernScrollBar());
     }
     public void showUser(){
         List.removeAll();
-        for(int i = 0;i < 20;i++){
-            List.add(new User_Item("User" + i,"online","/com/nhom11/icon/user.png"));
+//        users_List.clear();
+        for(Model_User_Account item : users_List){
+            List.add(new User_Item(item));
         }
         resetGraphics(List);
         
     }
     public void showGroup(){
         List.removeAll();
-        for(int i = 0;i < 5;i++){
-            List.add(new User_Item("Group" + i,"online","/com/nhom11/icon/user.png"));
-        }
+//        for(int i = 0;i < 5;i++){
+//            List.add();
+//        }
         resetGraphics(List);
     }
     
     public void showBox(){
         List.removeAll();
-        for(int i = 0;i < 5;i++){
-            List.add(new User_Item("Box" + i,"online","/com/nhom11/icon/user.png"));
-        }
+//        for(int i = 0;i < 5;i++){
+//            List.add();
+//        }
         resetGraphics(List);
     }
     

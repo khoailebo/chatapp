@@ -4,8 +4,7 @@
  */
 package com.nhom11.chatcomp;
 
-import com.nhom11.event.EventSetUserName;
-import com.nhom11.event.PublicEvent;
+import com.nhom11.model.Model_User_Account;
 import java.awt.Color;
 
 /**
@@ -17,33 +16,43 @@ public class Chat_Title extends javax.swing.JPanel {
     /**
      * Creates new form Chat_Body
      */
+    Model_User_Account user;
+
     public Chat_Title() {
         initComponents();
-        initEvent();
     }
-    
-    public void initEvent(){
-//        PublicEvent.getInstance().setEventLogin(new );
-        PublicEvent.getInstance().setEventSetUserName(new EventSetUserName(){
-            @Override
-            public void setUserName(String name) {
-//                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-                setName(name);
-            }
-            
-        });
+
+    public void setName(Model_User_Account user) {
+        this.user = user;
+        this.lbName.setText(user.getUserName());
+        if (user.isStatus()) {
+            setActiveStatus();
+        } else {
+            setStatus("Offline");
+        }
     }
-    public void setName(String name){
-        this.lbName.setText(name);
-    }
-    public void setActiveStatus(){
+
+    public void setActiveStatus() {
         lbStatus.setText("Active now");
         lbStatus.setForeground(new Color(0, 204, 51));
     }
-    public void setStatus(String status){
+
+    public void setStatus(String status) {
         lbStatus.setText(status);
-        lbStatus.setForeground(new Color(140,140,140));
+        lbStatus.setForeground(new Color(140, 140, 140));
     }
+
+    public void updateUser(Model_User_Account user) {
+        if (this.user != user) {
+            this.lbName.setText(user.getUserName());
+            if (user.isStatus()) {
+                setActiveStatus();
+            } else {
+                setStatus("Offline");
+            }
+        }
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

@@ -7,6 +7,7 @@ package com.nhom11.form;
 import com.nhom11.event.EventLogin;
 import com.nhom11.event.EventMessage;
 import com.nhom11.event.PublicEvent;
+import com.nhom11.model.Model_Login;
 import com.nhom11.model.Model_Message;
 import com.nhom11.model.Model_Register;
 import com.nhom11.model.Model_User_Account;
@@ -31,19 +32,43 @@ public class Login extends javax.swing.JPanel {
         slide.setAnimate(5);
         PublicEvent.getInstance().setEventLogin(new EventLogin() {
             @Override
-            public void login() {
+            public void login(Model_Login data,EventMessage em) {
 //                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
-                        try {
+//                        try {
 //                        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-                            PublicEvent.getInstance().getEventMain().showLoading(true);
-                            Thread.sleep(3000);
-                            PublicEvent.getInstance().getEventMain().initChat();
-                        } catch (Exception ex) {
-                            ex.printStackTrace();
-                        }
+                        Service.getInstance().getClient().emit("login", data.toJSONObject(), new Ack() {
+                            @Override
+                            public void call(Object... os) {
+//                        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+                                boolean login_Status = (boolean) os[0];
+//                                System.out.println(login_Status);
+                                if (login_Status) {
+                                    Service.getInstance().setCurrent_User_Account(new Model_User_Account(os[1]));
+                                        PublicEvent.getInstance().getEventMain().showLoading(true);
+                                    try {
+                                        Thread.sleep(3000);
+                                    }
+                                    catch(Exception e){
+                                        e.printStackTrace();
+                                    }
+                                        PublicEvent.getInstance().getEventMain().initChat();
+                                }
+                        else{
+                                    em.callMessage(new Model_Message(false,"Wrong password or user name"));
+                                }
+                            }
+
+                        });
+//                        if(Service.getInstance().getCurrent_User_Account() == null){
+//                            em.callMessage(new Model_Message(false,"Fail to connect to server"));
+//                        }
+
+//                        } catch (Exception ex) {
+//                            ex.printStackTrace();
+//                        }
                     }
 
                 }).start();
@@ -59,11 +84,8 @@ public class Login extends javax.swing.JPanel {
                         if (os.length > 0) {
                             Model_Message message = new Model_Message((boolean) os[0], String.valueOf(os[1]));
                             System.out.println(message.getMessage());
-                            if(message.isAction())
-//                            Service.setCurrent_User_Account(new Model_User_Account(os[2]));
-                        {
-                                System.out.println(os[2] + " " + String.valueOf(os[3]));
-                                PublicEvent.getInstance().getEventSetUserName().setUserName(String.valueOf(os[3]));
+                            if (message.isAction()) {
+                                Service.getInstance().setCurrent_User_Account(new Model_User_Account(os[2]));
                             }
                             em.callMessage(message);
                         }

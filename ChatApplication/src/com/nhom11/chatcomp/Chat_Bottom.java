@@ -5,6 +5,9 @@
 package com.nhom11.chatcomp;
 
 import com.nhom11.event.PublicEvent;
+import com.nhom11.model.Model_Send_Message;
+import com.nhom11.model.Model_User_Account;
+import com.nhom11.service.Service;
 import com.nhom11.swing.JIMSendTextPane;
 import com.nhom11.swing.ModernScrollBar;
 import java.awt.Color;
@@ -30,7 +33,7 @@ import net.miginfocom.swing.MigLayout;
  * @author PTIT
  */
 public class Chat_Bottom extends javax.swing.JPanel {
-
+    Model_User_Account user;
     /**
      * Creates new form Chat_Body
      */
@@ -74,7 +77,8 @@ public class Chat_Bottom extends javax.swing.JPanel {
             public void actionPerformed(ActionEvent ae) {
                 String text = txt.getText().trim();
                 if (!text.equals("")) {
-                    PublicEvent.getInstance().getEventSendMessage().sendMessage(text);
+                    PublicEvent.getInstance().getEventSendMessage().sendMessage(new Model_Send_Message(Service.getInstance().getCurrent_User_Account().getUserID(),
+                    user.getUserID(),text));
                     txt.setText("");
                     txt.grabFocus();
                     refresh();
@@ -86,7 +90,9 @@ public class Chat_Bottom extends javax.swing.JPanel {
         panel.add(cmd);
         add(panel);
     }
-
+    public void setUser(Model_User_Account user){
+        this.user = user;
+    }
     private void refresh() {
         repaint();
         revalidate();

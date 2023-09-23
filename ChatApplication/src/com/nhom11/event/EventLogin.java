@@ -4,6 +4,7 @@
  */
 package com.nhom11.event;
 
+import com.nhom11.model.Model_Login;
 import com.nhom11.model.Model_Message;
 import com.nhom11.model.Model_Register;
 
@@ -12,9 +13,8 @@ import com.nhom11.model.Model_Register;
  * @author btdun
  */
 public interface EventLogin {
-    public void login();
+    public void login(Model_Login data,EventMessage em);
     public void register(Model_Register data,EventMessage em);
     public void goLogin();
     public void goRegister();
-//    public void setUserName(String name);
 }

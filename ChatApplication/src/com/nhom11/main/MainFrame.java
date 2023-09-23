@@ -7,6 +7,7 @@ package com.nhom11.main;
 import com.nhom11.event.EventImageView;
 import com.nhom11.event.EventMain;
 import com.nhom11.event.PublicEvent;
+import com.nhom11.model.Model_User_Account;
 import com.nhom11.service.Service;
 import com.nhom11.swing.ComponentResizer;
 import java.awt.Dimension;
@@ -64,7 +65,7 @@ public class MainFrame extends javax.swing.JFrame {
         //connect to Server
         Service.getInstance().connectToServer();
     }
-
+    
     public void initEvent(){
         PublicEvent publicEvent = PublicEvent.getInstance();
         publicEvent.addEventImageView(new EventImageView(){
@@ -75,6 +76,7 @@ public class MainFrame extends javax.swing.JFrame {
             }
             
         });
+        
         PublicEvent.getInstance().setEventMain(new EventMain(){
             @Override
             public void showLoading(boolean show) {
@@ -87,6 +89,19 @@ public class MainFrame extends javax.swing.JFrame {
                 chatForm.setVisible(true);
                 login.setVisible(false);
                 loading.setVisible(false);
+                Service.getInstance().getClient().emit("list_user", Service.getInstance().getCurrent_User_Account().getUserID());
+            }
+
+            @Override
+            public void setUser(Model_User_Account user) {
+//                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+                chatForm.setUser(user);
+            }
+
+            @Override
+            public void updateUser(Model_User_Account user) {
+//                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+                 chatForm.updateUser(user);
             }
         
     });

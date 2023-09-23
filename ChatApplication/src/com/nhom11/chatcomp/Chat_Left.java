@@ -32,7 +32,8 @@ public class Chat_Left extends javax.swing.JLayeredPane {
         txt.setImage(false, images);
     }
     public void setTime(String time){
-        txt.setTime(time);    
+        txt.setTime(time);  
+        txt.seen();
     }
     
     /**

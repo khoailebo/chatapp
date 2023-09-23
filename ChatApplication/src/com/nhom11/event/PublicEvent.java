@@ -11,6 +11,20 @@ package com.nhom11.event;
 public class PublicEvent {
 
     /**
+     * @return the eventMenuLeft
+     */
+    public EventMenuLeft getEventMenuLeft() {
+        return eventMenuLeft;
+    }
+
+    /**
+     * @param eventMenuLeft the eventMenuLeft to set
+     */
+    public void setEventMenuLeft(EventMenuLeft eventMenuLeft) {
+        this.eventMenuLeft = eventMenuLeft;
+    }
+
+    /**
      * @return the eventMain
      */
     public EventMain getEventMain() {
@@ -57,8 +71,7 @@ public class PublicEvent {
     private EventSendMessage eventSendMessage;
     private EventMain eventMain;
     private EventLogin eventLogin;
-    private EventSetUserName eventSetUserName;
-    
+    private EventMenuLeft eventMenuLeft;
     private PublicEvent(){
         
     }
@@ -80,19 +93,5 @@ public class PublicEvent {
     }
     public EventImageDonwload getEventImageDonwload(){
         return eventImageDownload;
-    }
-
-    /**
-     * @return the eventSetUserName
-     */
-    public EventSetUserName getEventSetUserName() {
-        return eventSetUserName;
-    }
-
-    /**
-     * @param eventSetUserName the eventSetUserName to set
-     */
-    public void setEventSetUserName(EventSetUserName eventSetUserName) {
-        this.eventSetUserName = eventSetUserName;
     }
 }
