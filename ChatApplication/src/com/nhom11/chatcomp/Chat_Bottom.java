@@ -4,6 +4,7 @@
  */
 package com.nhom11.chatcomp;
 
+import com.nhom11.app.MessageType;
 import com.nhom11.event.PublicEvent;
 import com.nhom11.model.Model_Send_Message;
 import com.nhom11.model.Model_User_Account;
@@ -20,6 +21,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -33,7 +35,9 @@ import net.miginfocom.swing.MigLayout;
  * @author PTIT
  */
 public class Chat_Bottom extends javax.swing.JPanel {
+
     Model_User_Account user;
+
     /**
      * Creates new form Chat_Body
      */
@@ -43,15 +47,29 @@ public class Chat_Bottom extends javax.swing.JPanel {
     }
 
     private void init() {
-        setLayout(new MigLayout("fillx, filly", "0[fill]0[]0[]2", "0[fill]2"));
+        mig = new MigLayout("fillx, filly", "0[fill]0[]0[]2", "0[fill]2");
+        setLayout(mig);
         JScrollPane scroll = new JScrollPane();
         scroll.setBorder(null);
         JIMSendTextPane txt = new JIMSendTextPane();
         scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
-        txt.addKeyListener(new KeyAdapter() {
+        txt.addKeyListener(new KeyListener() {
             @Override
-            public void keyTyped(KeyEvent ke) {
+            public void keyTyped(KeyEvent e) {
+//                System.out.println(e.getKeyChar());
+//                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if(e.getKeyCode() == 10 && e.isControlDown())sendMessage(txt);
                 refresh();
+//                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+//                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
             }
         });
         txt.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -64,7 +82,7 @@ public class Chat_Bottom extends javax.swing.JPanel {
         add(sb);
         add(scroll, "w 100%");
         JPanel panel = new JPanel();
-        panel.setLayout(new MigLayout("filly", "0[]0", "0[bottom]0"));
+        panel.setLayout(new MigLayout("filly", "0[]3[]0", "0[bottom]0"));
         panel.setPreferredSize(new Dimension(30, 10));
         panel.setBackground(Color.WHITE);
         JButton cmd = new JButton();
@@ -75,29 +93,57 @@ public class Chat_Bottom extends javax.swing.JPanel {
         cmd.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                String text = txt.getText().trim();
-                if (!text.equals("")) {
-                    PublicEvent.getInstance().getEventSendMessage().sendMessage(new Model_Send_Message(Service.getInstance().getCurrent_User_Account().getUserID(),
-                    user.getUserID(),text));
-                    txt.setText("");
-                    txt.grabFocus();
-                    refresh();
-                } else {
-                    txt.grabFocus();
-                }
+                sendMessage(txt);
             }
         });
+        JButton cmdMore = new JButton();
+        cmdMore.setBorder(null);
+        cmdMore.setContentAreaFilled(false);
+        cmdMore.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        cmdMore.setIcon(new ImageIcon(getClass().getResource("/com/nhom11/icon/more.png")));
+        cmdMore.addActionListener((ActionEvent ae) -> {
+            if (panel_More.isVisible()) {
+                panel_More.setVisible(false);
+                mig.setComponentConstraints(panel_More, "dock south, height 0!");
+                cmdMore.setIcon(new ImageIcon(getClass().getResource("/com/nhom11/icon/more.png")));
+            } else {
+                panel_More.setVisible(true);
+                mig.setComponentConstraints(panel_More, "dock south, height 170!");
+                cmdMore.setIcon(new ImageIcon(getClass().getResource("/com/nhom11/icon/more_disable.png")));
+            }
+        });
+        panel.add(cmdMore);
         panel.add(cmd);
-        add(panel);
+        add(panel, "wrap");
+        panel_More = new Panel_More();
+        panel_More.setVisible(false);
+        add(panel_More, "dock south");
+        mig.setComponentConstraints(panel_More, "dock south, height 0!");
     }
-    public void setUser(Model_User_Account user){
+
+    public void setUser(Model_User_Account user) {
         this.user = user;
+        panel_More.setUser(user);
     }
+
     private void refresh() {
         repaint();
         revalidate();
     }
-    
+
+    public void sendMessage(JIMSendTextPane txt) {
+        String text = txt.getText().trim();
+        if (!text.equals("")) {
+            PublicEvent.getInstance().getEventSendMessage().sendMessage(new Model_Send_Message(MessageType.TEXT,Service.getInstance().getCurrent_User_Account().getUserID(),
+                    user.getUserID(), text));
+            txt.setText("");
+            txt.grabFocus();
+            refresh();
+        } else {
+            txt.grabFocus();
+        }
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -129,4 +175,6 @@ public class Chat_Bottom extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
+    private Panel_More panel_More;
+    private MigLayout mig;
 }

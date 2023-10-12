@@ -4,6 +4,7 @@
  */
 package com.nhom11.chatcomp;
 
+import com.nhom11.model.Model_Recieve_Message;
 import java.awt.Color;
 import javax.swing.Icon;
 
@@ -27,6 +28,9 @@ public class Chat_Left extends javax.swing.JLayeredPane {
         txt.setText(text);
         txt.sendSuccessfull();
 //        txt.setTime("10:30 PM");
+    }
+    public void setEmoji(Model_Recieve_Message ms){
+        txt.setEmoji(false, Integer.parseInt(ms.getText()));
     }
     public void setImage(Icon ... images){
         txt.setImage(false, images);

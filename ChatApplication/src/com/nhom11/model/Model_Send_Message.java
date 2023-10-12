@@ -4,6 +4,7 @@
  */
 package com.nhom11.model;
 
+import com.nhom11.app.MessageType;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -58,7 +59,10 @@ public class Model_Send_Message {
     public Model_Send_Message() {
     }
 
-    public Model_Send_Message(int fromUserID, int toUserID, String text) {
+ 
+
+    public Model_Send_Message(MessageType type, int fromUserID, int toUserID, String text) {
+        this.type = type;
         this.fromUserID = fromUserID;
         this.toUserID = toUserID;
         this.text = text;
@@ -67,6 +71,7 @@ public class Model_Send_Message {
     public JSONObject toJSONObject(){
         try{
             JSONObject json = new JSONObject();
+            json.put("type", type.getValue());
             json.put("fromUserID", fromUserID);
             json.put("toUserID", toUserID);
             json.put("text", text);
@@ -76,7 +81,22 @@ public class Model_Send_Message {
             return null;
         }
     }
+    private MessageType type;
     private int fromUserID;
     private int toUserID;
     private String text;
+
+    /**
+     * @return the type
+     */
+    public MessageType getType() {
+        return type;
+    }
+
+    /**
+     * @param type the type to set
+     */
+    public void setType(MessageType type) {
+        this.type = type;
+    }
 }

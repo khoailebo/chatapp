@@ -4,6 +4,8 @@
  */
 package com.nhom11.chatcomp;
 
+import com.nhom11.emoji.Emoji;
+import com.nhom11.model.Model_Recieve_Message;
 import com.nhom11.swing.JIMSendTextPane;
 import java.awt.Color;
 import java.awt.Cursor;
@@ -17,6 +19,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.border.EmptyBorder;
+import net.miginfocom.swing.MigLayout;
 
 /**
  *
@@ -56,7 +59,8 @@ public class Chat_Item extends javax.swing.JPanel {
         }
 
     }
-    public void setImage(boolean right,String... images){
+
+    public void setImage(boolean right, String... images) {
         if (images.length > 0) {
             JLayeredPane layer = new JLayeredPane();
             layer.setLayout(new FlowLayout(right ? FlowLayout.RIGHT : FlowLayout.LEFT));
@@ -66,6 +70,20 @@ public class Chat_Item extends javax.swing.JPanel {
             layer.add(chatImage);
             add(layer);
         }
+    }
+
+    public void setEmoji(boolean right,  int EmojiID) {
+//        setBackground(Color.black);
+        JLayeredPane layer = new JLayeredPane();
+        layer.setLayout(new MigLayout("fillx","[fill]","[fill]"));
+        layer.setBorder(new EmptyBorder(0, 0, 0, 0));
+//        layer.setBackground(Color.blue);
+//        Chat_Image chatImage = new Chat_Image(right);
+//        chatImage.setImage(images);
+        JLabel emoji = new JLabel(Emoji.getInstance().getEmoji(EmojiID).toSize(80, 80).getIcon());
+        emoji.setBorder(new EmptyBorder(0,0,0,0));
+        layer.add(emoji,"al center");
+        add(layer);
     }
 
     public void setProFile(String User) {
@@ -93,7 +111,8 @@ public class Chat_Item extends javax.swing.JPanel {
         Time_Panel.add(label);
         add(Time_Panel);
     }
-    public void setFile(boolean right,String fileName,String fileSize){
+
+    public void setFile(boolean right, String fileName, String fileSize) {
         JLayeredPane layer = new JLayeredPane();
         layer.setLayout(new FlowLayout());
         Chat_File file = new Chat_File();
@@ -103,6 +122,7 @@ public class Chat_Item extends javax.swing.JPanel {
         layer.add(file);
         add(layer);
     }
+
     public void sendSuccessfull() {
         if (label != null) {
             label.setIcon(new ImageIcon(getClass().getResource("/com/nhom11/icon/tick.png")));

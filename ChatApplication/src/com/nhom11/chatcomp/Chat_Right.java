@@ -4,6 +4,8 @@
  */
 package com.nhom11.chatcomp;
 
+import com.nhom11.model.Model_Recieve_Message;
+import com.nhom11.model.Model_Send_Message;
 import java.awt.Color;
 import javax.swing.Icon;
 
@@ -38,6 +40,10 @@ public class Chat_Right extends javax.swing.JLayeredPane {
     public void setTime(String time){
         txt.setTime(time);
         txt.sendSuccessfull();
+    }
+    
+    public void setEmoji(Model_Send_Message ms){
+        txt.setEmoji(true, Integer.parseInt(ms.getText()));
     }
     public void setFile(String fileName,String fileSize){
         txt.setFile(true, fileName, fileSize);

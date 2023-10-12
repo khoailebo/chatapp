@@ -4,6 +4,7 @@
  */
 package com.nhom11.chatcomp;
 
+import com.nhom11.app.MessageType;
 import com.nhom11.model.Model_Recieve_Message;
 import com.nhom11.model.Model_Send_Message;
 import com.nhom11.swing.ModernScrollBar;
@@ -43,89 +44,108 @@ public class Chat_Body extends javax.swing.JPanel {
 //        addItemRightFile("adobe illustrator.rar", "1 GB");
 //        addItemLeftFile("Dung", "Hello world.java", "4KB");
     }
-    public void init(){
-        body.setLayout(new MigLayout(" fillx","","10[]10"));
+
+    public void init() {
+        body.setLayout(new MigLayout("fillx", "", "10[]10"));
         //remenber to wrap comp when you add, if not they will be add to the same line
         //we want each of them in a new line
         sb.setVerticalScrollBar(new ModernScrollBar());
         sb.getVerticalScrollBar().setBackground(Color.white);
     }
-    public void addDate(String date){
+
+    public void addDate(String date) {
         Chat_Date d = new Chat_Date();
         d.setDate(date);
-        body.add(d,"wrap,al center");
-        
+        body.add(d, "wrap,al center");
+
     }
-    public void addItemLeft(String text, String user,Icon ... images){
+
+    public void addItemLeft(String text, String user, Icon... images) {
         Chat_Left_With_Profile item = new Chat_Left_With_Profile();
         item.setText(text);
         item.setImage(images);
         item.setTime("10:30 AM");
         item.setProfile(user);
 //        System.out.println(item.getWidth());
-        body.add(item,"wrap, w 100::80%");
+        body.add(item, "wrap, w 100::80%");
         body.repaint();
         body.revalidate();
     }
-    
-    public void addItemLeftFile(String user,String fileName,String fileSize){
+
+    public void addItemLeftFile(String user, String fileName, String fileSize) {
         Chat_Left_With_Profile item = new Chat_Left_With_Profile();
         item.setProfile(user);
         item.setText("");
         item.setFile(fileName, fileSize);
         item.setTime("10:45 PM");
-        
+
         //use wrap to add new line after you add this comp
-        body.add(item,"wrap, w 100::80%");
+        body.add(item, "wrap, w 100::80%");
         refresh(body);
     }
-    public void addItemLeft(String text, String user,String ... images){
+
+    public void addItemLeft(String text, String user, String... images) {
         Chat_Left_With_Profile item = new Chat_Left_With_Profile();
         item.setText(text);
         item.setImage(images);
         item.setTime("10:30 AM");
         item.setProfile(user);
 //        System.out.println(item.getWidth());
-        body.add(item,"wrap, w 100::80%");
+        body.add(item, "wrap, w 100::80%");
         body.repaint();
         body.revalidate();
     }
-    public void addItemRight(String text,Icon ... images){
+
+    public void addItemRight(String text, Icon... images) {
         Chat_Right item = new Chat_Right();
         item.setText(text);
 //        if(images != null)
         item.setImage(images);
         item.setTime("10:30 PM");
-        body.add(item,"wrap,al right, w 100::80%");
+        body.add(item, "wrap,al right, w 100::80%");
         scrollToBottom();
         body.repaint();
         body.revalidate();
     }
-    public void addItemRight(Model_Send_Message data){
+
+    public void addItemRight(Model_Send_Message data) {
         Chat_Right item = new Chat_Right();
-        item.setText(data.getText());
+        if (data.getType() == MessageType.TEXT) {
+            item.setText(data.getText());
+        } else if (data.getType() == MessageType.EMOJI) {
+            item.setEmoji(data);
+//            item.setTime();
+        }
         item.setTime(getCurrentTime());
-        body.add(item,"wrap,al right,w 100::80%");
+        body.add(item, "wrap,al right,w 100::80%");
         scrollToBottom();
         repaint();
         revalidate();
     }
-    
-    public String getCurrentTime(){
+
+    public String getCurrentTime() {
         Date dnow = new Date();
         SimpleDateFormat sf = new SimpleDateFormat("hh:mm");
         return sf.format(dnow);
     }
-    public void addItemLeft(Model_Recieve_Message data){
+
+    public void addItemLeft(Model_Recieve_Message data) {
         Chat_Left item = new Chat_Left();
-        item.setText(data.getText());
+        if (data.getType() == MessageType.TEXT) {
+            item.setText(data.getText());
+        } else if (data.getType() == MessageType.EMOJI) {
+            item.setEmoji(data);
+//            item.setTime();
+        }
+//        item.setText(data.getText());
         item.setTime(getCurrentTime());
-        body.add(item,"wrap,w 100::80%");
+        body.add(item, "wrap,w 100::80%");
         scrollToBottom();
         repaint();
         revalidate();
     }
-    public void addItemRight(String text, String user,String ... images){
+
+    public void addItemRight(String text, String user, String... images) {
         Chat_Right item = new Chat_Right();
         item.setText(text);
 //        if(images.length >= 1)
@@ -133,36 +153,40 @@ public class Chat_Body extends javax.swing.JPanel {
         item.setTime("10:30 AM");
 //        item.setProfile(user);
 //        System.out.println(item.getWidth());
-        body.add(item,"wrap,al right, w 100::80%");
+        body.add(item, "wrap,al right, w 100::80%");
         scrollToBottom();
         body.repaint();
         body.revalidate();
     }
-    public void addItemRightFile(String fileNameString, String fileSize){
+
+    public void addItemRightFile(String fileNameString, String fileSize) {
         Chat_Right item = new Chat_Right();
         item.setText("");
         item.setFile(fileNameString, fileSize);
         item.setTime("10:30 PM");
-        body.add(item,"wrap,al right, w 100::80%");
+        body.add(item, "wrap,al right, w 100::80%");
         scrollToBottom();
         refresh(body);
     }
-    public void addItemRight(String text){
+
+    public void addItemRight(String text) {
         Chat_Right item = new Chat_Right();
         item.setText(text);
 //        if(images != null)
 //        item.setImage(images);
         item.setTime("10:30 PM");
-        body.add(item,"wrap,al right, w 100::80%");
+        body.add(item, "wrap,al right, w 100::80%");
         scrollToBottom();
         body.repaint();
         body.revalidate();
     }
-    public void refresh(Component comp){
+
+    public void refresh(Component comp) {
         comp.repaint();
         comp.revalidate();
     }
-     private void scrollToBottom() {
+
+    private void scrollToBottom() {
         JScrollBar verticalBar = sb.getVerticalScrollBar();
         AdjustmentListener downScroller = new AdjustmentListener() {
             @Override
@@ -174,11 +198,13 @@ public class Chat_Body extends javax.swing.JPanel {
         };
         verticalBar.addAdjustmentListener(downScroller);
     }
-     public void resetChat(){
-         body.removeAll();
-         body.revalidate();
-         body.repaint();
-     }
+
+    public void resetChat() {
+        body.removeAll();
+        body.revalidate();
+        body.repaint();
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

@@ -107,7 +107,7 @@ public class Service {
 //                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
                 for(Model_Client client: userStatus){
                     if(client.getUser().getUserID() == t.getToUserID()){
-                        client.getClient().sendEvent("recieve", new Model_Recieve_Message(t.getFromUserID(),t.getText()));
+                        client.getClient().sendEvent("recieve", new Model_Recieve_Message(t.getType(),t.getFromUserID(),t.getText()));
                         break;
                     }
                 }

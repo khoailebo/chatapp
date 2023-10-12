@@ -4,6 +4,7 @@
  */
 package com.nhom11.model;
 
+import com.nhom11.app.MessageType;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -12,6 +13,20 @@ import org.json.JSONObject;
  * @author btdun
  */
 public class Model_Recieve_Message {
+
+    /**
+     * @return the type
+     */
+    public MessageType getType() {
+        return type;
+    }
+
+    /**
+     * @param type the type to set
+     */
+    public void setType(MessageType type) {
+        this.type = type;
+    }
 
     /**
      * @return the fromUserID
@@ -44,6 +59,7 @@ public class Model_Recieve_Message {
     public Model_Recieve_Message(Object json) {
         try {
             JSONObject js = (JSONObject) json;
+            this.type = MessageType.toMessageType(js.getInt("type"));
             this.fromUserID = js.getInt("fromUserID");
             this.text = js.getString("text");
         }catch(JSONException e){
@@ -55,7 +71,8 @@ public class Model_Recieve_Message {
         this.fromUserID = fromUserID;
         this.text = text;
     }
-
+    
+    private MessageType type;
     private int fromUserID;
     private String text;
 }
