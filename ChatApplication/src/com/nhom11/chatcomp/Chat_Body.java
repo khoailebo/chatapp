@@ -217,11 +217,12 @@ public class Chat_Body extends javax.swing.JPanel {
         sb = new javax.swing.JScrollPane();
         body = new javax.swing.JPanel();
 
-        setBackground(new java.awt.Color(255, 255, 255));
+        setBackground(new java.awt.Color(51, 51, 51));
 
+        sb.setBackground(new java.awt.Color(102, 102, 102));
         sb.setBorder(null);
 
-        body.setBackground(new java.awt.Color(255, 255, 255));
+        body.setBackground(new java.awt.Color(60, 60, 60));
 
         javax.swing.GroupLayout bodyLayout = new javax.swing.GroupLayout(body);
         body.setLayout(bodyLayout);

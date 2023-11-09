@@ -59,6 +59,7 @@ public class MainFrame extends javax.swing.JFrame {
         //Design
         setBackground(Color.black);
         
+        
         Default_Width = getWidth();
         Default_Height = getHeight();
         view_image.setVisible(false);
@@ -127,6 +128,7 @@ public class MainFrame extends javax.swing.JFrame {
         controlPanel2 = new com.nhom11.comp.ControlPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(51, 51, 51));
         setUndecorated(true);
 
         From_Panel.setBackground(new java.awt.Color(102, 102, 102));
@@ -142,11 +144,8 @@ public class MainFrame extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(controlPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1170, Short.MAX_VALUE)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(From_Panel)
-                .addContainerGap())
+            .addComponent(controlPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1199, Short.MAX_VALUE)
+            .addComponent(From_Panel, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

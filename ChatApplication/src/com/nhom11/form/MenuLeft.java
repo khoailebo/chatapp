@@ -140,10 +140,13 @@ public class MenuLeft extends javax.swing.JPanel {
         group = new com.nhom11.comp.MyButton();
         box = new com.nhom11.comp.MyButton();
 
+        setBackground(new java.awt.Color(51, 51, 51));
+
         sp.setBackground(new java.awt.Color(255, 255, 255));
         sp.setBorder(null);
+        sp.setOpaque(false);
 
-        List.setBackground(new java.awt.Color(255, 255, 255));
+        List.setBackground(new java.awt.Color(51, 51, 51));
         List.setOpaque(true);
 
         javax.swing.GroupLayout ListLayout = new javax.swing.GroupLayout(List);
@@ -159,7 +162,7 @@ public class MenuLeft extends javax.swing.JPanel {
 
         sp.setViewportView(List);
 
-        Button_Box.setBackground(new java.awt.Color(255, 255, 255));
+        Button_Box.setBackground(new java.awt.Color(51, 51, 51));
 
         message.setBackground(new java.awt.Color(150, 202, 255));
         message.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/nhom11/icon/message.png"))); // NOI18N

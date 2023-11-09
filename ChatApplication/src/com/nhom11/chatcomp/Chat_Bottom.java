@@ -47,12 +47,14 @@ public class Chat_Bottom extends javax.swing.JPanel {
     }
 
     private void init() {
-        mig = new MigLayout("fillx, filly", "0[fill]0[]0[]2", "0[fill]2");
+        mig = new MigLayout("fillx, filly", "0[fill]0[]2", "0[fill]2");
         setLayout(mig);
         JScrollPane scroll = new JScrollPane();
         scroll.setBorder(null);
         JIMSendTextPane txt = new JIMSendTextPane();
         scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+        scroll.setOpaque(false);
+        scroll.setBackground(new Color(51,51,51,0));
         txt.addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {
@@ -74,6 +76,8 @@ public class Chat_Bottom extends javax.swing.JPanel {
         });
         txt.setBorder(new EmptyBorder(5, 5, 5, 5));
         txt.setHintText("Write Message Here ...");
+        txt.setOpaque(false);
+        txt.setBackground(new Color(80,80,80,0));
         scroll.setViewportView(txt);
         ModernScrollBar sb = new ModernScrollBar();
         sb.setBackground(new Color(229, 229, 229));
@@ -114,6 +118,7 @@ public class Chat_Bottom extends javax.swing.JPanel {
         });
         panel.add(cmdMore);
         panel.add(cmd);
+        panel.setOpaque(false);
         add(panel, "wrap");
         panel_More = new Panel_More();
         panel_More.setVisible(false);
@@ -157,7 +162,7 @@ public class Chat_Bottom extends javax.swing.JPanel {
 
         jLabel1.setText("jLabel1");
 
-        setOpaque(false);
+        setBackground(new java.awt.Color(102, 102, 102));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);

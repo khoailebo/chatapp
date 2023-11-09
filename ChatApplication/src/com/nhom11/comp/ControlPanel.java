@@ -111,6 +111,8 @@ public class ControlPanel extends javax.swing.JPanel {
         ChangeSize = new javax.swing.JButton();
         IconButton = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(102, 102, 102));
+
         ExitButton.setBackground(new java.awt.Color(255, 51, 51));
         ExitButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/nhom11/icon/exit-button-01.png"))); // NOI18N
         ExitButton.setBorder(null);

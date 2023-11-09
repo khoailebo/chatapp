@@ -7,6 +7,8 @@ package com.nhom11.comp;
 import com.nhom11.event.PublicEvent;
 import com.nhom11.model.Model_User_Account;
 import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import javax.swing.ImageIcon;
 
 /**
@@ -43,6 +45,8 @@ public class User_Item extends javax.swing.JPanel {
         }
     }
 
+    
+    
     public void updateStatus() {
         Label_Status.setText(user.isStatus() ? "online" : "offline");
         activeStatus.setActive(user.isStatus());
@@ -62,7 +66,7 @@ public class User_Item extends javax.swing.JPanel {
         Avatar = new com.nhom11.swing.ImageAvatar();
         activeStatus = new com.nhom11.swing.ActiveStatus();
 
-        setBackground(new java.awt.Color(255, 255, 255));
+        setBackground(new java.awt.Color(51, 51, 51));
         setForeground(new java.awt.Color(102, 102, 102));
         addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
@@ -77,8 +81,10 @@ public class User_Item extends javax.swing.JPanel {
         });
 
         Label_Name.setFont(new java.awt.Font("Segoe UI", 0, 17)); // NOI18N
+        Label_Name.setForeground(new java.awt.Color(255, 255, 255));
         Label_Name.setText("Name");
 
+        Label_Status.setForeground(new java.awt.Color(255, 255, 255));
         Label_Status.setText("online");
 
         Avatar.setBackground(new java.awt.Color(153, 153, 153));
@@ -123,7 +129,7 @@ public class User_Item extends javax.swing.JPanel {
     }//GEN-LAST:event_formMouseEntered
 
     private void formMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseExited
-        setBackground(Color.white);
+        setBackground(new Color(51,51,51));
         mouseOver = false;
     }//GEN-LAST:event_formMouseExited
 

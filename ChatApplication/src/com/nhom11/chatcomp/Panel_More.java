@@ -15,6 +15,7 @@ import com.nhom11.model.Model_User_Account;
 import com.nhom11.service.Service;
 import com.nhom11.swing.ModernScrollBar;
 import com.nhom11.swing.WrapLayout;
+import java.awt.Color;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import javax.swing.BoxLayout;
@@ -44,6 +45,7 @@ public class Panel_More extends javax.swing.JPanel {
         setLayout(new MigLayout("fillx, wrap", "[]", "[]3[]"));
         //Header
         Panel_Header = new JPanel();
+        Panel_Header.setBackground(new Color(90,90,90));
         Panel_Header.setLayout(new BoxLayout(Panel_Header, BoxLayout.LINE_AXIS));
         Panel_Header.add(getButtonFile());
         Panel_Header.add(getButtonEmoji1());
@@ -126,7 +128,7 @@ public class Panel_More extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setBackground(new java.awt.Color(204, 204, 204));
+        setBackground(new java.awt.Color(51, 51, 51));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);

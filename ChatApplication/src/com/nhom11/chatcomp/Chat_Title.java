@@ -66,10 +66,12 @@ public class Chat_Title extends javax.swing.JPanel {
         lbName = new javax.swing.JLabel();
         lbStatus = new javax.swing.JLabel();
 
+        setBackground(new java.awt.Color(51, 51, 51));
+
         layer.setLayout(new java.awt.GridLayout(0, 1));
 
         lbName.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
-        lbName.setForeground(new java.awt.Color(51, 51, 51));
+        lbName.setForeground(new java.awt.Color(255, 102, 51));
         lbName.setText("Name");
         layer.add(lbName);
 

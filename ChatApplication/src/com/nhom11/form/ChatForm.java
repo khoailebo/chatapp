@@ -20,6 +20,8 @@ public class ChatForm extends JLayeredPane{
         add(new MenuLeft());
         add(chat);
         add(new MenuRight());
+        setOpaque(true);
+        setBackground(new Color(51,51,51,200));
         chat.setVisible(false);
     }
     public void setUser(Model_User_Account user){
